@@ -41,3 +41,20 @@ flex-direction: column;
   padding: 0.5rem 0;
   overflow: hidden;
 }
+.delete {
+  width: 4rem;
+  border-radius: 5px;
+  border: 1px solid gray;
+  position: absolute;
+  display: none;
+  right: 2px;
+  top: 30%;
+  background-color: rgb(253, 94, 94);
+  color: white;
+  transition: 0.4s !important;
+}
+
+.del-hover:hover .delete{
+  display: block;
+  transition: 0.4s;
+}

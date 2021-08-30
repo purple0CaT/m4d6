@@ -53,6 +53,7 @@ class CommentArea extends React.Component {
                 comment={comm.comment}
                 rate={comm.rate}
                 asin={this.state.asin}
+                loadComments = {this.loadComments}
               />
             );
           })
