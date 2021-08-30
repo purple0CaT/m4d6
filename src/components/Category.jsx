@@ -5,7 +5,7 @@ import { Container ,Row, Col } from "react-bootstrap"
 
 const Category= ({categor, showThisCom, showCom})=>{
     return(
-        <Row key={categor[0].category}>
+        <Row key={categor[0].category + categor[2]._id}>
             <Col xs="12 mt-5">
                 <h2>{categor[0].category.charAt(0).toUpperCase() + categor[0].category.slice(1)}</h2>
                 <hr />

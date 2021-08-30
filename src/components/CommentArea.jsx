@@ -1,4 +1,4 @@
-import { Button, Container } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import React from "react";
 import AddComent from "./addComent";
 import Comments from "./Comments";
@@ -6,16 +6,20 @@ import Comments from "./Comments";
 class CommentArea extends React.Component {
   state = {
     comments: [],
+    asin: this.props.asin,
+    loading: false
   };
-
-componentDidMount() {
-   this.loadComments()
+  // On load
+  componentDidMount() {
+    this.loadComments();
   }
-componentDidUpdate(prev, prevState){
-    this.loadComments()
-}
+  //   Refresh
+  componentDidUpdate(prev, prevState) {
+    prev.asin !== this.props.asin && this.loadComments();
+  }
   // FETCH COMMENTS
   loadComments = async () => {
+    this.setState({loading : true}) 
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
@@ -29,7 +33,7 @@ componentDidUpdate(prev, prevState){
         }
       );
       const data = await response.json();
-      this.state.comments = data;
+      this.setState({comments : data, loading: false}) 
     } catch (e) {
       console.log(e);
     }
@@ -38,15 +42,17 @@ componentDidUpdate(prev, prevState){
   render() {
     return (
       <>
-        {Object.values(this.state.comments).map((comm) => (
+        { this.state.loading ?   <Spinner animation="grow" variant="info" />
+        :
+        Object.values(this.state.comments).map((comm) => { return(
           <Comments
             _id={comm._id}
             author={comm.author}
             comment={comm.comment}
             rate={comm.rate}
-            asin={this.props.asin}
+            asin={this.state.asin}
           />
-        ))}
+        )})}
       </>
     );
   }

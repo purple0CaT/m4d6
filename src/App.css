@@ -35,3 +35,8 @@ flex-direction: column;
  transition: 1s;
  z-index: 999;
 }
+.comment-bg {
+  border-radius: 20px;
+  background-color: rgba(243, 243, 243, 0.664) !important;
+  padding: 0.5rem 0;
+}

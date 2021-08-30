@@ -35,7 +35,7 @@ class Library extends Component {
           <Container className="text-center w-75">
             <h2>Commentaries</h2>
             <hr />
-            {<CommentsArea asin={this.state.comAsin} />}
+            {this.state.showCom ? <CommentsArea asin={this.state.comAsin} />: <p>No comments picked</p>}
           </Container>
         </Col>
       </Row>

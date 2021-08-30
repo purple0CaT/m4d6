@@ -7,13 +7,13 @@ class Comments extends React.Component {
     return (
       <>
         {
-              <div key={this.props._id} className='d-flex flex-column'>
+              <div key={this.props._id + this.props.rate} className='d-flex flex-column comment-bg'>
                 <small className="font-weight-bold">
                   {this.props.author}
                 </small>
                 <small>{this.props.comment}</small>
-                <small>{this.props.rate}</small>
-                <small>{this.props.asin}</small>
+                <small className="font-weight-bold">Rate: {Array.from({length:this.props.rate}).map(x => '⭐️')}</small>
+                <small>Asin: {this.props.asin}</small>
                 <hr />
               </div>
             

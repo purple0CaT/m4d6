@@ -8,9 +8,9 @@ class SingBook extends React.Component {
   render()
   {
     let book = this.props.book;
-    
+
     return (
-      <Col xs="12 mb-2" md="3" lg="2" key={book.asin +book.category}>
+      <Col xs="12 mb-2" md="3" lg="2" key={book.asin + book.category + book.asin}>
         <Card className="h-100">
           <Card.Img variant="top" src={book.img} />
           <Card.Body className="d-flex flex-column justify-content-end p-2">
