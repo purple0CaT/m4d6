@@ -7,6 +7,7 @@ class Comments extends React.Component {
   };
 
   deleteCom = async (e) => {
+    this.succDelete();
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" + this.state.id,
@@ -19,9 +20,8 @@ class Comments extends React.Component {
         }
       );
       if (response.ok) {
-        this.succDelete();
-        setTimeout(this.succDelete, 2000);
-        setTimeout(this.reloadCom, 2000);
+        setTimeout(this.succDelete);
+        this.reloadCom()
       }
     } catch (e) {
       console.log(e);
