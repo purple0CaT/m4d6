@@ -62,12 +62,12 @@ class AddComent extends React.Component {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        this.loadAlert();
         this.sendingAlert();
         setTimeout(this.sendingAlert, 2000);
         setTimeout(this.emptyVal, 2000);
       }
     } catch (e) {
+      this.loadAlert();
       console.log(e);
     }
   };
@@ -87,6 +87,7 @@ class AddComent extends React.Component {
                 onChange={(e) => {
                   this.comentInput(e, "author");
                 }}
+                required
               />
             </Form.Group>
 
@@ -99,6 +100,7 @@ class AddComent extends React.Component {
                 onChange={(e) => {
                   this.comentInput(e, "comment");
                 }}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -110,6 +112,7 @@ class AddComent extends React.Component {
                 onChange={(e) => {
                   this.comentInput(e, "rate");
                 }}
+                required
               />
             </Form.Group>
             {this.state.loadSend ? (

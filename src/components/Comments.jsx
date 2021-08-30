@@ -1,5 +1,7 @@
 import React from "react";
 import { Spinner } from "react-bootstrap";
+import {AiFillCloseCircle} from 'react-icons/ai'
+
 class Comments extends React.Component {
   state = {
     id: this.props._id,
@@ -24,7 +26,8 @@ class Comments extends React.Component {
         this.reloadCom()
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
+      this.reloadCom()
     }
   };
   succDelete = () => {
@@ -52,7 +55,7 @@ class Comments extends React.Component {
             )}
             <button className="delete" onClick={this.deleteCom}>
               {" "}
-              delete{" "}
+              <AiFillCloseCircle />{" "}
             </button>
           </div>
         }
