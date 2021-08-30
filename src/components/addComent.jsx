@@ -31,10 +31,21 @@ class AddComent extends React.Component {
   loadAlert = () => {
     this.setState({ loadSend: !this.state.loadSend });
   };
+  // Set empty 
+  emptyVal = ()=>{
+    this.setState({
+      commentSend: {
+        author: "",
+        comment: "",
+        rate: 1,
+        elementId: this.props.asin
+      },
+    });
+  }
   //   SEND COMMENTS
   sendComment = async (e) => {
     e.preventDefault();
-    this.loadAlert()
+    this.loadAlert();
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/",
@@ -51,9 +62,10 @@ class AddComent extends React.Component {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        this.loadAlert()
+        this.loadAlert();
         this.sendingAlert();
         setTimeout(this.sendingAlert, 2000);
+        setTimeout(this.emptyVal, 2000);
       }
     } catch (e) {
       console.log(e);
@@ -71,7 +83,7 @@ class AddComent extends React.Component {
               <Form.Control
                 type="text"
                 placeholder="Insert your name"
-                value={this.state.commentSend.name}
+                value={this.state.commentSend.author}
                 onChange={(e) => {
                   this.comentInput(e, "author");
                 }}
@@ -102,6 +114,10 @@ class AddComent extends React.Component {
             </Form.Group>
             {this.state.loadSend ? (
               <Spinner animation="border" variant="warning" />
+            ) : this.state.sendSuccess ? (
+              <Alert variant="success" className="mt-2">
+                Succes
+              </Alert>
             ) : (
               <Button type="submit" variant="warning">
                 {" "}
@@ -110,11 +126,6 @@ class AddComent extends React.Component {
             )}
           </form>
         }
-        {this.state.sendSuccess && (
-          <Alert variant="success" className="mt-2">
-            Succes
-          </Alert>
-        )}
       </>
     );
   }
