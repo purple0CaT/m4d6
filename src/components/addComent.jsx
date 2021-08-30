@@ -122,7 +122,7 @@ class AddComent extends React.Component {
                 Succes
               </Alert>
             ) : (
-              <Button type="submit" variant="warning">
+              <Button type="submit" variant="success">
                 {" "}
                 Send
               </Button>

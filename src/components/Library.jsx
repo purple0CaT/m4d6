@@ -11,7 +11,7 @@ import CommentsArea from "./CommentArea";
 class Library extends Component {
   state = {
     showCom: false,
-    comAsin: null
+    comAsin: null,
   };
 
   showThisCom = (asin) => {
@@ -24,21 +24,27 @@ class Library extends Component {
 
   render() {
     return (
-      <Row>
-        <Col xs="9">
-          <LatestRel
-            showThisCom={this.showThisCom}
-            showCom={this.state.showCom}
-          />
-        </Col>
-        <Col xs="3">
-          <Container className="text-center w-75">
-            <h2>Commentaries</h2>
-            <hr />
-            {this.state.showCom ? <CommentsArea asin={this.state.comAsin} />: <p>No comments picked</p>}
-          </Container>
-        </Col>
-      </Row>
+      <>
+        <Row className="px-4">
+          <Col xs="9">
+            <LatestRel
+              showThisCom={this.showThisCom}
+              showCom={this.state.showCom}
+            />
+          </Col>
+          <Col xs="3 d-flex flex-column text-center">
+            <div className="text-center">
+              <h2 className="font-weight-light mx-auto">Commentaries</h2>
+              <hr />
+              </div>
+              {this.state.showCom ? (
+                <CommentsArea asin={this.state.comAsin} />
+              ) : (
+                <h5 className="font-weight-light mx-auto">Book're not picked</h5>
+              )}
+          </Col>
+        </Row>
+      </>
     );
   }
 }

@@ -77,3 +77,15 @@ button {
   border-radius: 20px !important;
 
 }
+#cards {
+  border-radius: 20px !important;
+}
+hr {
+  border: 1px solid black;
+}
+
+.pickedBook {
+  background-color: rgba(0, 255, 213, 0.089) !important;
+  border: unset;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.205);
+}

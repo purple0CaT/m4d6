@@ -18,8 +18,8 @@ class LatestRel extends React.Component{
       <Container>
         <Row className="justify-content-center">
         <Col xs="12">
-          <h3>Latest Releases</h3>
-          <hr />
+          <h2 className='font-weight-light'>Latest Releases</h2>
+          <hr/>
         </Col>
         {
         Object.values(this.state.books).map(categor => <SingBook showThisCom={this.props.showThisCom} showCom={this.props.showCom} book={categor[0]}/>)

@@ -43,7 +43,7 @@ class CommentArea extends React.Component {
     return (
       <>
         {this.state.loading ? (
-          <Spinner animation="grow" variant="warning" />
+          <Spinner animation="grow" variant="warning" className='mx-auto'/>
         ) : (
           Object.values(this.state.comments).map((comm) => {
             return (
