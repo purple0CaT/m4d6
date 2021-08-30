@@ -7,7 +7,7 @@ class CommentArea extends React.Component {
   state = {
     comments: [],
     asin: this.props.asin,
-    loading: false
+    loading: false,
   };
   // On load
   componentDidMount() {
@@ -19,7 +19,7 @@ class CommentArea extends React.Component {
   }
   // FETCH COMMENTS
   loadComments = async () => {
-    this.setState({loading : true}) 
+    this.setState({ loading: true });
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
@@ -33,7 +33,7 @@ class CommentArea extends React.Component {
         }
       );
       const data = await response.json();
-      this.setState({comments : data, loading: false}) 
+      this.setState({ comments: data, loading: false });
     } catch (e) {
       console.log(e);
     }
@@ -42,17 +42,23 @@ class CommentArea extends React.Component {
   render() {
     return (
       <>
-        { this.state.loading ?   <Spinner animation="grow" variant="info" />
-        :
-        Object.values(this.state.comments).map((comm) => { return(
-          <Comments
-            _id={comm._id}
-            author={comm.author}
-            comment={comm.comment}
-            rate={comm.rate}
-            asin={this.state.asin}
-          />
-        )})}
+        {this.state.loading ? (
+          <Spinner animation="grow" variant="warning" />
+        ) : (
+          Object.values(this.state.comments).map((comm) => {
+            return (
+              <Comments
+                _id={comm._id}
+                author={comm.author}
+                comment={comm.comment}
+                rate={comm.rate}
+                asin={this.state.asin}
+              />
+            );
+          })
+        )}
+        <hr />
+        <AddComent asin={this.state.asin} />
       </>
     );
   }

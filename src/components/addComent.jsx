@@ -1,24 +1,46 @@
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Alert, Spinner, Form } from "react-bootstrap";
 import React from "react";
 
 class AddComent extends React.Component {
   state = {
-    asin: this.props.asins,
+    asin: this.props.asin,
     book: this.props.bookName,
+    loadSend: false,
+    sendSuccess: false,
     commentSend: {
       author: "",
       comment: "",
-      rate: 0,
-      elementId: this.props.comAsin,
+      rate: 1,
+      elementId: this.props.asin,
     },
   };
-//   SEND COMMENTS
-  async sendComment() {
+  //   INPUT COMMENT
+  comentInput = (e, comentNam) => {
+    this.setState({
+      commentSend: {
+        ...this.state.commentSend,
+        [comentNam]: e.target.value,
+      },
+    });
+  };
+  // Sending alerts
+  sendingAlert = () => {
+    this.setState({ sendSuccess: !this.state.sendSuccess });
+  };
+  // load Send alerts
+  loadAlert = () => {
+    this.setState({ loadSend: !this.state.loadSend });
+  };
+  //   SEND COMMENTS
+  sendComment = async (e) => {
+    e.preventDefault();
+    this.loadAlert()
     try {
       const response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/" + this.props.comAsin,
-        {method: "POST",
-          body: JSON.stringify(this.state.coomentSend),
+        "https://striveschool-api.herokuapp.com/api/comments/",
+        {
+          method: "POST",
+          body: JSON.stringify(this.state.commentSend),
           headers: {
             "Content-type": "application/json",
             Authorization:
@@ -26,72 +48,73 @@ class AddComent extends React.Component {
           },
         }
       );
-      const data = await response.json();
-      console.log(data);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        this.loadAlert()
+        this.sendingAlert();
+        setTimeout(this.sendingAlert, 2000);
+      }
     } catch (e) {
       console.log(e);
     }
-  }
-  //   INPUT COMMENT
-  comentInput(e, comentNam) {
-    this.setState({
-      ...this.state.commentSend,
-      [comentNam]: e.target.value,
-    });
-  }
-
+  };
 
   render() {
     return (
       <>
         {/* FORM */}
+        {
+          <form onSubmit={this.sendComment}>
+            <Form.Group>
+              <Form.Label>Your name?</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Insert your name"
+                value={this.state.commentSend.name}
+                onChange={(e) => {
+                  this.comentInput(e, "author");
+                }}
+              />
+            </Form.Group>
 
-        <Modal.Dialog>
-          <Modal.Header closeButton>
-            <Modal.Title>Add comment to {this.state.book}</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            {
-              <form onSubmit={this.sendComment}>
-                <Form.Group>
-                  <Form.Label>Your name?</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Insert your email"
-                    onChange={(e) =>
-                      this.setState(this.comentInput(e, "author"))
-                    }
-                  />
-                </Form.Group>
-
-                <Form.Group>
-                  <Form.Label>Your email?</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Your comment"
-                    onChange={(e) =>
-                      this.setState(this.comentInput(e, "comment"))
-                    }
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Rate</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Your comment"
-                    onChange={(e) => this.setState(this.comentInput(e, "rate"))}
-                  />
-                </Form.Group>
-              </form>
-            }
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="secondary">Close</Button>
-            <Button variant="primary">Send</Button>
-          </Modal.Footer>
-        </Modal.Dialog>
+            <Form.Group>
+              <Form.Label>Comment</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Your comment"
+                value={this.state.commentSend.comment}
+                onChange={(e) => {
+                  this.comentInput(e, "comment");
+                }}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Rate</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Your comment"
+                value={this.state.commentSend.rate}
+                onChange={(e) => {
+                  this.comentInput(e, "rate");
+                }}
+              />
+            </Form.Group>
+            {this.state.loadSend ? (
+              <Spinner animation="border" variant="warning" />
+            ) : (
+              <Button type="submit" variant="warning">
+                {" "}
+                Send
+              </Button>
+            )}
+          </form>
+        }
+        {this.state.sendSuccess && (
+          <Alert variant="success" className="mt-2">
+            Succes
+          </Alert>
+        )}
       </>
     );
   }

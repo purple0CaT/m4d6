@@ -39,4 +39,5 @@ flex-direction: column;
   border-radius: 20px;
   background-color: rgba(243, 243, 243, 0.664) !important;
   padding: 0.5rem 0;
+  overflow: hidden;
 }
