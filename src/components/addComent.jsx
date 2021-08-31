@@ -31,17 +31,17 @@ class AddComent extends React.Component {
   loadAlert = () => {
     this.setState({ loadSend: !this.state.loadSend });
   };
-  // Set empty 
-  emptyVal = ()=>{
+  // Set empty
+  emptyVal = () => {
     this.setState({
       commentSend: {
         author: "",
         comment: "",
         rate: 1,
-        elementId: this.props.asin
+        elementId: this.props.asin,
       },
     });
-  }
+  };
   //   SEND COMMENTS
   sendComment = async (e) => {
     e.preventDefault();
@@ -59,12 +59,14 @@ class AddComent extends React.Component {
           },
         }
       );
+      const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
         console.log(data);
+        this.loadAlert();
         this.sendingAlert();
-        setTimeout(this.sendingAlert, 2000);
-        setTimeout(this.emptyVal, 2000);
+        setTimeout(this.sendingAlert, 1500);
+        setTimeout(this.emptyVal, 1900);
+        this.props.loadComments()
       }
     } catch (e) {
       this.loadAlert();

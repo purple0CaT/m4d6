@@ -53,10 +53,10 @@ class Comments extends React.Component {
             {this.state.loadDel && (
               <Spinner animation="border" variant="danger" className="mx-auto text-center"/>
             )}
-            <button className="delete" onClick={this.deleteCom}>
+            <a className="delete" onClick={this.deleteCom}>
               {" "}
               <AiFillCloseCircle />{" "}
-            </button>
+            </a>
           </div>
         }
       </>

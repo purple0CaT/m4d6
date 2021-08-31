@@ -45,29 +45,29 @@ flex-direction: column;
   border: unset;
   min-height: 1rem;
   min-width: 1rem;
-  border-radius: 8rem;
+  border-radius: 50%;
   position: absolute;
   display: flex;
   left: 0.2rem;
   color: white;
-  transition: 0.5s !important;
+  transition: 0.3s !important;
   background-color: rgb(253, 94, 94);
-}
-.delete:hover svg{
-  color: white !important;
 }
 .delete svg{
   transition: 0.5s !important;
   color: rgb(253, 94, 94) !important;
   display: none;
 }
-
 .delete:hover svg{
-display: block;
+  transform: scale(0.8);
+  color: white !important;
+  display: block;
+
 }
 .delete:hover {
-  transform: scale(1.1);
-  border:1px solid rgb(253, 94, 94);
+  cursor: pointer;
+  transform: scale(1.2);
+  border:0px solid rgb(253, 94, 94);
 
 }
 input {
