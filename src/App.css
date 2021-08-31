@@ -71,17 +71,19 @@ flex-direction: column;
 
 }
 input {
-  border-radius: 20px !important;
+  border-radius: 1rem !important;
 }
 button {
-  border-radius: 20px !important;
+  border-radius: 2rem !important;
+  padding: 0.5rem auto!important;
 
 }
 #cards {
-  border-radius: 20px !important;
+  border-bottom-left-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
 }
 hr {
-  border: 1px solid black;
+  border: 1px solid black !;
 }
 
 .pickedBook {
